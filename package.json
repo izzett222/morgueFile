@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "npm run build && nodemon dist/server.js",
+    "build": "babel server --out-dir dist"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,11 @@
   "homepage": "https://github.com/izzett222/morgueFile#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "nodemon": "^2.0.4"
   }
 }
