@@ -1,0 +1,24 @@
+{
+  "name": "morgueFile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/izzett222/morgueFile.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/izzett222/morgueFile/issues"
+  },
+  "homepage": "https://github.com/izzett222/morgueFile#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
