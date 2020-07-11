@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && node dist/server.js",
-    "build": "babel server --out-dir dist"
+    "build": "babel server --out-dir dist",
+    "dev": "nodemon --exec babel-node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,16 @@
   },
   "homepage": "https://github.com/izzett222/morgueFile#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "eslint": "^7.4.0",
     "eslint-config-airbnb-base": "^14.2.0",
