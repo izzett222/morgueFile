@@ -10,9 +10,10 @@ app.use('/', swaggerRoute);
 app.get('/', async (req, res) => {
   try {
     await db.sequelize.authenticate();
-    res.send('welcome to morgueFile api connected to database');
+    res.status(200).json({ message: 'welcome to morgueFile api connected to database' });
   } catch (err) {
-    res.send('unable to connect');
+    res.status(500).json({ message: 'unable to connect' });
   }
 });
 app.listen(port, () => process.stdout.write(`Server is running on http://localhost:${port}`));
+export default app;
