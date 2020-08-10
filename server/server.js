@@ -1,10 +1,12 @@
 import express from 'express';
 import morgan from 'morgan';
+import { config } from 'dotenv';
 import swaggerRoute from './routes/swagger/swagger';
 import db from './database/models/index';
 
+config();
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.use(morgan('dev'));
 app.use('/', swaggerRoute);
 app.get('/', async (req, res) => {
