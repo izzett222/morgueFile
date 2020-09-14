@@ -13,7 +13,7 @@ describe('test the welcome api', () => {
       .request(app)
       .get('/')
       .end((err, res) => {
-        expect(res.body.message).to.equal('welcome to morgueFile api connected to database');
+        expect(res.body.message).to.equal('welcome to morgueFile api');
         done();
       });
   });

@@ -1,12 +1,13 @@
 {
-  "name": "morgueFile",
+  "name": "morguefile",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test nyc mocha --require @babel/register ./server/test/*.test.js --timeout 20000 --exit",
+    "test": "cross-env NODE_ENV=test npx sequelize db:migrate:undo:all && cross-env NODE_ENV=test npx sequelize db:migrate && cross-env NODE_ENV=test nyc mocha --require @babel/register ./server/test/*.test.js --timeout 20000 --exit",
     "start": "node ./build/server.js",
-    "build": "babel ./server --out-dir ./build",
+    "migrateDb": "sequelize db:migrate:undo:all && sequelize db:migrate",
+    "build": "npm run migrateDb && babel ./server --out-dir ./build",
     "dev": "nodemon --exec babel-node server/server.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "cover": "nyc --reporter=html --reporter=text npm test"
@@ -23,8 +24,12 @@
   },
   "homepage": "https://github.com/izzett222/morgueFile#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "joi": "^17.2.1",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",
@@ -49,6 +54,7 @@
     "eslint-plugin-import": "^2.22.0",
     "mocha": "^8.1.0",
     "nodemon": "^2.0.4",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "sinon": "^9.0.3"
   }
 }
