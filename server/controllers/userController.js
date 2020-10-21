@@ -1,11 +1,13 @@
 import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
-import createToken from '../utils/handleJWT';
+import { createToken } from '../utils/handleJWT';
+import createEmail from '../utils/createEmailHtml';
+import sendEmail from '../utils/sendEmail';
 import db from '../database/models';
 
 config();
 
-const signupController = async (req, res) => {
+export const signupController = async (req, res) => {
   const { User } = db;
   const {
     firstName, lastName, email, password,
@@ -16,7 +18,9 @@ const signupController = async (req, res) => {
     };
     const newUser = await User.create(data);
     const { password: userPassword, ...userData } = newUser.dataValues;
-    const token = createToken(email);
+    const token = createToken(newUser.id);
+    const emailBody = createEmail(userData.firstName, 'welcome to morguefile', 'please click on the button below to verify ur account', 'verify', 'www.google.com');
+    await sendEmail(userData.email, 'verify account', emailBody);
     return res.status(201).json({ data: { message: 'signed up successfully', user: userData, token } });
   } catch (err) {
     if (err.errors[0].message === 'email must be unique') {
@@ -26,4 +30,14 @@ const signupController = async (req, res) => {
   }
 };
 
-export default signupController;
+export const verifyAccountController = async (req, res) => {
+  const { user } = req;
+  const { User } = db;
+  console.log(user);
+  try {
+    await User.update({ isVerified: true }, { where: { id: user.id } });
+    return res.status(200).json({ message: 'Account verified successfully' });
+  } catch (err) {
+    return res.status(500).json({ error: 'server error' });
+  }
+};

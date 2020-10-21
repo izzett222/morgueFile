@@ -19,7 +19,6 @@ describe('TEST SIGNUP', () => {
         password: 'Aime12&efe*',
       })
       .end((err, res) => {
-        console.log(res);
         expect(res.status).to.equal(201);
         expect(res.body.data.message).to.equal('signed up successfully');
         expect(res.body.data.token).to.be.a('string');

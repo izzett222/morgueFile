@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 app.use('/', swaggerRoute);
 app.use('/api/v1/user', userRoute);
 app.get('/', (req, res) => {
-  res.status(200).json({ message: 'welcome to morgueFile api' });
+  res.status(200).json({ message: 'welcome to chat-app api' });
 });
 app.listen(port, () => process.stdout.write(`Server is running on http://localhost:${port}`));
 export default app;

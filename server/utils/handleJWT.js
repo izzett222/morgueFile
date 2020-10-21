@@ -2,8 +2,8 @@ import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 
 config();
-const createJWT = (email) => {
-  const string = jwt.sign({ email }, process.env.JWT_SECRET);
+export const createToken = (id) => {
+  const string = jwt.sign({ id }, process.env.JWT_SECRET);
   return string;
 };
-export default createJWT;
+export const verifyToken = (token) => jwt.verify(token, process.env.JWT_SECRET);
